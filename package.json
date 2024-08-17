@@ -25,5 +25,11 @@
     "express": "^4.19.2",
     "mongoose": "^8.5.2",
     "nodemon": "^3.1.4"
+  },
+  "javaDependencies": {
+    "java": "0.14.0"  
+  },
+  "pythonDependencies": {
+    "python": "^3.12.3"  
   }
 }
