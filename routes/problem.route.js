@@ -5,7 +5,7 @@ const problemRoute = express.Router();
 
 problemRoute.post('/new-problem', async(req,res) => {
     try{
-        const { name, difficulty, type, description, examples, constraints, boilerPlates } = req.body;
+        const { name, difficulty, type, description, examples, constraints, boilerPlates,value } = req.body;
         const newProblem = new ProblemModal({
             name,
             difficulty,
@@ -13,7 +13,8 @@ problemRoute.post('/new-problem', async(req,res) => {
             description,
             examples,
             constraints,
-            boilerPlates
+            boilerPlates,
+            value
         });
         await newProblem.save();
 
@@ -27,7 +28,7 @@ problemRoute.post('/new-problem', async(req,res) => {
 problemRoute.post('/generate-problem', async(req,res) => {
     const { name } = req.body;
     try{
-        const problem = await ProblemModal.find({'name':name})
+        const problem = await ProblemModal.find({'value':name})
         if(problem && problem.length > 0) {
             res.status(200).send(problem)
         }else{

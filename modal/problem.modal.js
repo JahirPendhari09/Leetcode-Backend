@@ -12,6 +12,7 @@ const problemSchema = new mongoose.Schema({
     difficulty: String,
     type: String,
     description: String,
+    value: String,
     examples: [exampleSchema],
     constraints: [String],
     boilerPlates: [

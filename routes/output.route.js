@@ -8,7 +8,6 @@ const { generateJavascriptCode } = require('../code-generators/javascrip_generat
 
 const runCodeRouter = express.Router();
 
-
 runCodeRouter.post('/', async (req, res) => {
     try {
         const { language, code, problem, function: func } = req.body;
@@ -34,15 +33,19 @@ runCodeRouter.post('/', async (req, res) => {
 
         const results = [];
 
+        console.log(examples,'examples')
+        console.log(problem,'problem')
+        console.log(code,'code')
         for (const example of examples) {
             const { input } = example;
-            const { nums, target, nums1, nums2, head, pos } = input;
+            const { nums, target, nums1, nums2, head, pos, k } = input;
             const problemName = func.name;
 
             if (language === 'javascript') {
                 try {
-                    const jsCode = generateJavascriptCode(problemName, code, { nums, target, nums1, nums2, head, pos });
+                    const jsCode = generateJavascriptCode(problemName, code, { nums, target, nums1, nums2, head, pos, k });
                     // Execute the JavaScript code using vm
+                    console.log(jsCode,'jsCode')
                     const script = new vm.Script(jsCode);
                     const context = vm.createContext({ result: null });
                     script.runInContext(context);
@@ -64,7 +67,9 @@ runCodeRouter.post('/', async (req, res) => {
                         'reverse_string': () => script.reverse_string(JSON.stringify(nums)),
                         'next_greater_element': () => script.next_greater_element(nums1, nums2),
                         'missing_number': () => script.missing_number(nums),
-                        'has_cycle': () => script.has_cycle(head)
+                        'has_cycle': () => script.has_cycle(head),
+                        'rotate': () => script.rotate(nums,k),
+                        'sortArray': () => script.sortArray(nums)
                     };
 
                     if (functionMap[problemName]) {
@@ -78,7 +83,7 @@ runCodeRouter.post('/', async (req, res) => {
                     break;
                 }
             } else if (language === 'java') {
-                const updatedCode = generateJavaCode(problemName, code, { nums, target, nums1, nums2, head, pos });
+                const updatedCode = generateJavaCode(problemName, code, { nums, target, nums1, nums2, head, pos, k });
                 fs.writeFileSync(fileName, updatedCode);
                 try {
                     const result = await executeJavaCode(fileName, input);

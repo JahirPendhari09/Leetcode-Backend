@@ -523,6 +523,168 @@ const dummyData = [
             }
         ]        
     },
+    {
+        'id':6,
+        'name' :'Rotate Array',
+        'value':'rotate-array',
+        'dificulty':'Medium',
+        'type': 'array',
+        'description':'Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.',
+        'examples' :[
+            {
+                'id':1,
+                'input':{'nums' : [1,2,3,4,5,6,7], 'k' : 3},
+                'output':[5,6,7,1,2,3,4],
+                'explanation':'\n rotate 1 steps to the right: [7,1,2,3,4,5,6] \n rotate 2 steps to the right: [6,7,1,2,3,4,5] \n rotate 3 steps to the right: [5,6,7,1,2,3,4]'
+            },
+            {
+                'id':2,
+                'input':{'nums' : [-1,-100,3,99] , 'k': 2 },
+                'output':[3,99,-1,-100],
+                'explanation':'n = 2 since there are 2 numbers, so all numbers are in the range [0,2]. 2 is the missing number in the range since it does not appear in nums.'
+            },
+            {
+                "id": 3,
+                "input": {"nums": [1, 2, 3, 4, 5, 6, 7, 8, 9], "k": 8},
+                "output": [2, 3, 4, 5, 6, 7, 8, 9, 1]
+            },
+            {
+                "id": 4,
+                "input": {"nums": [5, 6, 7, 8, 9, 10, 11, 12, 13], "k": 18},
+                "output": [5, 6, 7, 8, 9, 10, 11, 12, 13]
+            },
+            {
+                "id": 5,
+                "input": {"nums": [-10, -5, 0, 5, 10], "k": 3},
+                "output": [0, 5, 10, -10, -5]
+            },
+            {
+                "id": 6,
+                "input": {"nums": [7, 1, 5, 2, 3, 6, 4], "k": 100000},
+                "output": [5,2,3,6,4,7,1]
+            },
+            {
+                "id": 7,
+                "input": {"nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "k": 15},
+                "output": [6, 7, 8, 9, 10, 1, 2, 3, 4, 5]
+            },
+            {
+                "id": 8,
+                "input": {"nums": [4, 3, 2, 1], "k": 6},
+                "output": [2, 1, 4, 3]
+            },
+            {
+                "id": 9,
+                "input": {"nums": [1, 2, 3, 4, 5, 6], "k": 9},
+                "output": [4, 5, 6, 1, 2, 3]
+            },
+            {
+                "id": 10,
+                "input": {"nums": [100, 200, 300, 400, 500], "k": 12},
+                "output": [400, 500, 100, 200, 300]
+            }
+        ],
+        'constraints':[
+            '1 <= nums.length <= 105',
+            '-231 <= nums[i] <= 231 - 1',
+            '0 <= k <= 105'
+        ],
+        'boilerPlates' :[
+            {
+                "language": "javascript",
+                "boilerplate": "function rotate(nums,k) {\n  // Write your code here \n return [] \n};"
+            },
+            {
+                "language": "java",
+                "boilerplate": "public int[] rotate(int[] nums, int k) {\n  // Write your code here and return your result \n return null; \n}"
+            },
+            {
+                "language": "python",
+                "boilerplate": "def rotate(nums, k):\n  # Write your code here and return your result\n return []"
+            },
+        ]        
+    },
+    {
+        'id':7,
+        'name' :'Sort an Array',
+        'value':'sort-an-array',
+        'dificulty':'Medium',
+        'type': 'array',
+        'description':`Given an array of integers nums, sort the array in ascending order and return it.
+           \n You must solve the problem without using any built-in functions in O(nlog(n)) time complexity and with the smallest space complexity possible.`,
+        'examples' :[
+            {
+                'id':1,
+                'input':{'nums' : [5,2,3,1] },
+                'output':[1,2,3,5],
+                'explanation':'After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).'
+            },
+            {
+                'id':2,
+                'input':{'nums' : [5,1,1,2,0,0] },
+                'output':[0,0,1,1,2,5],
+                'explanation':' Note that the values of nums are not necessairly unique.'
+            },
+            {
+                "id": 3,
+                "input": {"nums": [1000, -1000, 0, 500, -500]},
+                "output": [-1000, -500, 0, 500, 1000]
+            },
+            {
+                "id": 4,
+                "input": {"nums": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]},
+                "output": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            {
+                "id": 5,
+                "input": {"nums": [5, 7, 5, 7, 8, 8, 9, 9, 10, 10]},
+                "output": [5, 5, 7, 7, 8, 8, 9, 9, 10, 10]
+            },
+            {
+                "id": 6,
+                "input": {"nums": [1, 5, 3, 7, 6, 2, 4, 8, 9, 10]},
+                "output": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            {
+                "id": 7,
+                "input": {"nums": [9, 8, 7, 6, 5, 4, 3, 2, 1]},
+                "output": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            {
+                "id": 8,
+                "input": {"nums": [5, 10, -5, -10, 0]},
+                "output": [-10, -5, 0, 5, 10]
+            },
+            {
+                "id": 9,
+                "input": {"nums": [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]},
+                "output": [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+            },
+            {
+                "id": 10,
+                "input": {"nums": [7, 1, 3, 9, 2, 8, 6, 4, 5]},
+                "output": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+        ],
+        'constraints':[
+            '1 <= nums.length <= 5 * 104',
+            '-5 * 104 <= nums[i] <= 5 * 104'
+        ],
+        'boilerPlates' :[
+            {
+                "language": "javascript",
+                "boilerplate": "function sortArray(nums) {\n  // Write your code here \n return [] \n};"
+            },
+            {
+                "language": "java",
+                "boilerplate": "public int[] sortArray(int[] nums) {\n  // Write your code here and return your result \n return null; \n}"
+            },
+            {
+                "language": "python",
+                "boilerplate": "def sortArray(nums):\n  # Write your code here and return your result\n return []"
+            },
+        ]        
+    }
 ]
 
 module.exports = { dummyData }

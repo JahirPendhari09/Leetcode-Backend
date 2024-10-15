@@ -133,6 +133,56 @@ const generateJavaCode = (problemName, code, params) => {
         `
         }
 
+        case 'rotate': {
+            return `
+            import java.util.*;
+            public class Example {{
+                ${code}
+                public static void main(String[] args) {{
+                    Example example = new Example();
+                    int[] nums = ${str(kwargs['nums']).replace('[','{').replace(']','}')};
+                    int k = ${kwargs['k']};
+                    int[] result = example.rotate(nums,k);
+                    if (result != null) {{
+                        System.out.print("[");
+                        for (int i = 0; i < result.length; i++) {{
+                            System.out.print(result[i]);
+                            if (i < result.length - 1) {{
+                                 System.out.print(", ");
+                            }}
+                        }}
+                        System.out.print("]");
+                    }} else {{
+                        System.out.print("No solution found.");
+                    }}
+                }}
+            }}
+        `}
+    case 'sortArray' :  {
+        return `
+        import java.util.*;
+        public class Example {{
+            ${code}
+            public static void main(String[] args) {{
+                Example example = new Example();
+                int[] nums = ${str(kwargs['nums']).replace('[','{').replace(']','}')};
+                int[] result = example.sortArray(nums);
+                if (result != null) {{
+                    System.out.print("[");
+                    for (int i = 0; i < result.length; i++) {{
+                        System.out.print(result[i]);
+                        if (i < result.length - 1) {{
+                            System.out.print(", ");
+                        }}
+                    }}
+                    System.out.print("]");
+                }} else {{
+                    System.out.print("No solution found.");
+                }}
+
+            }}
+        }}
+        `}
         default : {
             return 'Problem not found'
         }

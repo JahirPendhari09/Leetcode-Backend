@@ -36,6 +36,25 @@ const generateJavascriptCode = (problemName, code, problemDescription) => {
                 console.log(result)
             `;
             break;
+        case 'rotate':
+            resultCode = ` 
+                ${code}
+                let nums = ${JSON.stringify(problemDescription.nums)};
+                let k = ${problemDescription.k};
+                var result = ${problemName}(nums,k);
+                console.log(result)
+            `;
+            break;
+
+        case 'sortArray': 
+            resultCode = `
+                ${code}
+                let nums = ${JSON.stringify(problemDescription.nums)}
+                var result = ${problemName}(nums);
+                console.log(result)
+        `;
+        break;
+
         case 'hasCycle':
             resultCode = `
                 class ListNode {
