@@ -1,15 +1,14 @@
 const mongoose =require('mongoose');
 
 const loginSchema = mongoose.Schema({
-    email:{ type: string ,required : true},
-    password: { type : string, required: true}
+    username:{ type: String ,required : true},
+    password: { type : String, required: true}
 },{versionKey:false});
 
 const registerSchema = mongoose.Schema({
-    email:{ type: string ,required : true},
-    password: { type : string, required: true},
-    firstName: { type : string, required: true},
-    lastName: { type: string, required: true},
+    email:{ type: String, required : true},
+    password: { type : String, required: true},
+    username: { type : String, required: true},
     profile: String,
 },{versionKey:false});
 
