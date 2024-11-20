@@ -33,9 +33,6 @@ runCodeRouter.post('/', async (req, res) => {
 
         const results = [];
 
-        console.log(examples,'examples')
-        console.log(problem,'problem')
-        console.log(code,'code')
         for (const example of examples) {
             const { input } = example;
             const { nums, target, nums1, nums2, head, pos, k } = input;

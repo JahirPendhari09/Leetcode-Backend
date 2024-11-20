@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/JahirPendhari09/Leetcode-Backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "execjs": "^1.0.7",
@@ -27,9 +28,9 @@
     "nodemon": "^3.1.4"
   },
   "javaDependencies": {
-    "java": "0.14.0"  
+    "java": "0.14.0"
   },
   "pythonDependencies": {
-    "python": "^3.12.3"  
+    "python": "^3.12.3"
   }
 }
