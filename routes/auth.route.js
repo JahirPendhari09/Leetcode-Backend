@@ -2,6 +2,7 @@ const express = require('express');
 const { RegisterModal } = require('../modal/auth.modal');
 const authRouter = express.Router();
 const bcrypt = require('bcrypt');
+const { sendMailResponse } = require('./email');
 const saltRounds = 10;
 
 authRouter.post('/login', async(req,res) => {
@@ -38,6 +39,7 @@ authRouter.post('/register', async(req,res) => {
                     username, password: hash, email
                 })
                 await newUser.save()
+                sendMailResponse(email)
                 res.status(200).send({'message': `New user Successfully registerd.`, user: newUser})
             }else{
                 res.status(400).send({'error': 'something went wrong'})
