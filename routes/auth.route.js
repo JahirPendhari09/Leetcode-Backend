@@ -17,7 +17,7 @@ authRouter.post('/login', async(req,res) => {
         if(user) {
             bcrypt.compare(password, user.password, async(err, result) => {
                 if(result) {
-                    res.status(200).send({'message': "Login Successful"})
+                    res.status(200).send({'message': "Login Successful", "user": user })
                 }else{
                     res.status(400).send({'error': 'Incorrect password'})
                 }
@@ -54,13 +54,15 @@ authRouter.post('/register', async(req,res) => {
 authRouter.post('/send-otp', async(req,res) => {
     const {username, email} = req.body;
     try{
-        const newOtp = Math.floor(100000 + Math.random() * 900000); 
+        const newOtp = Math.floor(1000 + Math.random() * 9000);
+        console.log(newOtp)
         const otp =  new OtpModal({
             username,
-            opt: newOtp,
+            otp: newOtp,
             email,
             date: new Date()
         })
+        console.log(otp)
         await otp.save()
         await sendOtp(email,newOtp)
         res.status(200).send({'message':"OTP has been sent to your registered email address"})
@@ -70,9 +72,9 @@ authRouter.post('/send-otp', async(req,res) => {
 })
 
 authRouter.post('/verify-otp', async(req,res) => {
-    const {email, userOtp} = req.body;
+    const {email, otp} = req.body;
     try{
-        const otpRecord = await OtpModal.findOne({ otp: userOtp, email });
+        const otpRecord = await OtpModal.findOne({ otp: otp, email });
         if(otpRecord){
             const otpTime = new Date(otpRecord.date);
             const currentTime = new Date();
@@ -81,22 +83,22 @@ authRouter.post('/verify-otp', async(req,res) => {
                 const updatedUser = await RegisterModal.findOneAndUpdate(
                     { email },
                     { isEmailVerified: true }, 
-                    { new: true }             // Return the updated document
+                    { new: true }  
                 );
 
                 if (updatedUser) {
                     res.status(200).send({
-                        message: "OTP verified successfully.",
-                        user: updatedUser,
+                        'message': "OTP verified successfully.",
+                        'user': updatedUser,
                     });
                 } else {
-                    res.status(404).send({ message: "User not found." });
+                    res.status(404).send({ 'message': "User not found." });
                 }
             } else {
-                res.status(400).send({ message: "OTP has expired. Please request a new one." });
+                res.status(400).send({ 'message': "OTP has expired. Please request a new one." });
             }
         }else{
-            res.status(400).send({'Message': "Invalid OTP. Please check the OTP and try again."})
+            res.status(400).send({'message': "Invalid OTP. Please check the OTP and try again."})
         }        
     }catch(err){
         res.status(500).send({'error': "Failed to verify OTP. Please try again."})
@@ -111,4 +113,5 @@ authRouter.get('/logout', (req,res) => {
         res.status(500).send({'error': err})        
     }
 })
+
 module.exports = { authRouter }
