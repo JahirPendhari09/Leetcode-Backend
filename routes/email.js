@@ -59,4 +59,30 @@ const sendMailResponse = async email => {
     }
 };
 
-module.exports = { main, sendMailResponse }
+const sendOtp = async (email, otp) => {
+    try {
+        const html = `
+        <p>Dear Student,</p>
+        <p>Welcome to <strong>LeetCode by Jahir</strong>!</p>
+        <p>Your One-Time Password (OTP) is: <strong>${otp}</strong></p>
+        <p>Please note that this OTP is valid for <strong>5 minutes</strong>.</p>
+        <p>If you have any questions or need assistance, feel free to reach out to us.</p>
+        <br>
+        <p>Happy Coding!</p>
+        <p><strong>Best Regards,</strong></p>
+        <p><strong>Jahir Pendhari.</strong></p>
+        <p><strong>+91-8668953367.</strong></p>
+        `;
+
+        await transporter.sendMail({
+            from: process.env.GMAIL_USER,
+            to: email,
+            subject: 'Your OTP for LeetCode by Jahir - Verify Your Email',
+            html: html
+        });
+    } catch (err) {
+        console.log("Error sending email:", err);
+    }
+};
+
+module.exports = { main, sendMailResponse,sendOtp }
